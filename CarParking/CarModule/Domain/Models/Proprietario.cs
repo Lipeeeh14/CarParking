@@ -17,5 +17,11 @@
 			Nome = nome;
 			CPF = cpf;
 		}
+
+		public void Atualizar(string? nome, string? cpf) 
+		{
+			Nome = nome;	
+			CPF = cpf;
+		}
 	}
 }
