@@ -65,5 +65,55 @@ namespace CarModule.Domain.Services
 
 			return true;
 		}
+
+		public async Task<VeiculoViewModel?> SalvarVeiculo(CadastroVeiculoDTO veiculoDTO)
+		{
+			var proprietario = await _proprietarioRepository.ObterProprietarioPorId(veiculoDTO.ProprietarioId);
+
+			if (proprietario == null) return null;
+
+			var veiculo = _mapper.Map<Veiculo>(veiculoDTO);
+			proprietario.AdicionarVeiculo(veiculo);
+
+			await _proprietarioRepository.AtualizarProprietario(proprietario);
+			await _proprietarioRepository.SaveChangesAsync();
+
+			return _mapper.Map<VeiculoViewModel>(veiculo);
+		}
+
+		public async Task<VeiculoViewModel?> ObterVeiculoPorPlaca(string placa)
+		{
+			var veiculo = await _proprietarioRepository.ObterVeiculoPorPlaca(placa);
+
+			return _mapper.Map<VeiculoViewModel?>(veiculo);
+		}
+
+		public async Task<VeiculoViewModel?> AtualizarVeiculo(CadastroVeiculoDTO veiculoDTO)
+		{
+			var veiculo = await _proprietarioRepository.ObterVeiculoPorPlaca(veiculoDTO.Placa);
+
+			if (veiculo == null) return null;
+
+			veiculo.Atualizar(veiculoDTO.Modelo, veiculoDTO.Marca);
+
+			await _proprietarioRepository.AtualizarVeiculo(veiculo);
+			await _proprietarioRepository.SaveChangesAsync();
+
+			return _mapper.Map<VeiculoViewModel>(veiculo);
+		}
+
+		public async Task<bool> DeletarVeiculo(long proprietarioId, string placa)
+		{
+			var proprietario = await _proprietarioRepository.ObterProprietarioPorId(proprietarioId);
+
+			if (proprietario == null) return false;
+
+			if (!proprietario.RemoverVeiculo(placa)) return false;
+
+			await _proprietarioRepository.AtualizarProprietario(proprietario);
+			await _proprietarioRepository.SaveChangesAsync();
+
+			return true;
+		}
 	}
 }

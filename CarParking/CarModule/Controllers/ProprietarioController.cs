@@ -75,5 +75,53 @@ namespace CarModule.Controllers
 
 			return Ok(result);
 		}
+
+		[HttpGet]
+		[Route("veiculo/{placa}")]
+		public async Task<IActionResult> ObterVeiculoPorPlaca(string placa) 
+		{
+			var result = await _proprietarioService.ObterVeiculoPorPlaca(placa);
+
+			if (result == null)
+				return BadRequest("Erro ao obter o veículo!");
+
+			return Ok(result);
+		}
+
+		[HttpPost]
+		[Route("veiculo")]
+		public async Task<IActionResult> AdicionarVeiculo(CadastroVeiculoDTO veiculoDTO) 
+		{
+			var result = await _proprietarioService.SalvarVeiculo(veiculoDTO);
+
+			if (result == null)
+				return BadRequest("Erro ao salvar o veículo!");
+
+			return Ok(result);
+		}
+
+		[HttpPut]
+		[Route("veiculo")]
+		public async Task<IActionResult> AtualizarVeiculo(CadastroVeiculoDTO veiculoDTO)
+		{
+			var result = await _proprietarioService.AtualizarVeiculo(veiculoDTO);
+
+			if (result == null)
+				return BadRequest("Erro ao atualizar o veículo!");
+
+			return Ok(result);
+		}
+
+		[HttpDelete]
+		[Route("{id}/veiculo/{placa}")]
+		public async Task<IActionResult> DeletarVeiculo(long id, string placa) 
+		{
+			var result = await _proprietarioService.DeletarVeiculo(id, placa);
+
+			if (!result)
+				return BadRequest("Erro ao excluir o veículo");
+
+			return Ok(result);
+		}
 	}
 }

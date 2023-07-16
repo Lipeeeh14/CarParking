@@ -10,5 +10,9 @@ namespace CarModule.Domain.Services.Interfaces
 		Task<ProprietarioViewModel?> SalvarProprietario(CadastroProprietarioDTO proprietarioDTO);
 		Task<ProprietarioViewModel?> AtualizarProprietario(AtualizaProprietarioDTO proprietarioDTO);
 		Task<bool> DeletarProprietario(long id);
+		Task<VeiculoViewModel?> SalvarVeiculo(CadastroVeiculoDTO veiculoDTO);
+		Task<VeiculoViewModel?> ObterVeiculoPorPlaca(string placa);
+		Task<VeiculoViewModel?> AtualizarVeiculo(CadastroVeiculoDTO veiculoDTO);
+		Task<bool> DeletarVeiculo(long proprietarioId, string placa);
 	}
 }

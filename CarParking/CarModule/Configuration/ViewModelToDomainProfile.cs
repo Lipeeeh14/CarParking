@@ -13,6 +13,9 @@ namespace CarModule.Configuration
 
 			CreateMap<AtualizaProprietarioDTO, Proprietario>()
 				.ReverseMap();
+
+			CreateMap<CadastroVeiculoDTO, Veiculo>()
+				.ReverseMap();
 		}
 	}
 }

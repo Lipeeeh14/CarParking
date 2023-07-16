@@ -9,5 +9,7 @@ namespace CarModule.Data.Repositories.Interfaces
 		Task SalvarProprietario(Proprietario proprietario);
 		Task AtualizarProprietario(Proprietario proprietario);
 		Task DeletarProprietario(Proprietario proprietario);
+		Task<Veiculo?> ObterVeiculoPorPlaca(string placa);
+		Task AtualizarVeiculo(Veiculo veiculo);
 	}
 }

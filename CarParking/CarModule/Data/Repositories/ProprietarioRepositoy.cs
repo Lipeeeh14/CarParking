@@ -39,5 +39,17 @@ namespace CarModule.Data.Repositories
 		{
 			await Task.Run(() => _context.Remove(proprietario));
 		}
+
+		public async Task<Veiculo?> ObterVeiculoPorPlaca(string placa)
+		{
+			return await _context.Veiculo
+				.Include(v => v.Proprietario)
+				.FirstOrDefaultAsync(v => v.Placa == placa);
+		}
+
+		public async Task AtualizarVeiculo(Veiculo veiculo)
+		{
+			await Task.Run(() => _context.Veiculo.Update(veiculo));
+		}
 	}
 }

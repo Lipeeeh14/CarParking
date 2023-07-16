@@ -9,6 +9,10 @@ namespace CarModule.Configuration
 		public DomainToViewModelProfile()
 		{
 			CreateMap<Proprietario, ProprietarioViewModel>()
+				.ForMember(src => src.Veiculos, opt => opt.MapFrom(src => src.Veiculos))
+				.ReverseMap();
+
+			CreateMap<Veiculo, VeiculoViewModel>()
 				.ReverseMap();
 		}
 	}
