@@ -1,13 +1,13 @@
-using CarModule.Configuration.Profiles;
-using CarModule.Data;
-using CarModule.Data.Repositories;
-using CarModule.Data.Repositories.Interfaces;
-using CarModule.Domain.Services;
-using CarModule.Domain.Services.Interfaces;
+using CarParking.Configuration.Profiles;
+using CarParking.Data;
+using CarParking.Data.Repositories;
+using CarParking.Data.Repositories.Interfaces;
+using CarParking.Domain.Services;
+using CarParking.Domain.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddSqlServer<CarContext>(builder.Configuration["ConnectionString:Local"]);
+builder.Services.AddSqlServer<CarParkingContext>(builder.Configuration["ConnectionString:Local"]);
 
 // Add services to the container.
 
@@ -19,9 +19,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(DomainToViewModelProfile));
 builder.Services.AddAutoMapper(typeof(ViewModelToDomainProfile));
 
-builder.Services.AddScoped<IProprietarioService, ProprietarioService>();
+builder.Services.AddScoped<ISetorService, SetorService>();
 
-builder.Services.AddScoped<IProprietarioRepository, ProprietarioRepositoy>();
+builder.Services.AddScoped<ISetorRepository, SetorRepository>();
 
 var app = builder.Build();
 

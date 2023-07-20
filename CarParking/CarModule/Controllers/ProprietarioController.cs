@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CarModule.Domain.Services.Interfaces;
 using CarModule.DTOs;
-using CarModule.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarModule.Controllers
@@ -14,7 +13,7 @@ namespace CarModule.Controllers
 
 		private readonly IProprietarioService _proprietarioService;
 
-		public ProprietarioController(IProprietarioService proprietarioService, IMapper mapper)
+		public ProprietarioController(IProprietarioService proprietarioService)
 		{
 			_proprietarioService = proprietarioService;
 		}
