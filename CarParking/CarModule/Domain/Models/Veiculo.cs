@@ -17,5 +17,11 @@
 			Modelo = modelo;
 			Marca = marca;
 		}
+
+		public void Atualizar(string? modelo, string? marca) 
+		{
+			Modelo = modelo;
+			Marca = marca;
+		}
 	}
 }
