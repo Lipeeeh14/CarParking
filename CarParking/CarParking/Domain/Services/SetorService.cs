@@ -69,5 +69,55 @@ namespace CarParking.Domain.Services
 
 			return true;
 		}
+
+		public async Task<VagaViewModel?> CadastrarVaga(CadastroVagaDTO vagaDTO)
+		{
+			var setor = await _setorRepository.ObterSetorPorId(vagaDTO.SetorId);
+
+			if (setor == null) return null;
+
+			if (setor.VagaExistente(vagaDTO.Numero)) return null;
+
+			var vaga = _mapper.Map<Vaga>(vagaDTO);
+
+			setor.AdicionarVaga(vaga);
+
+			await _setorRepository.AtualizarSetor(setor);
+			await _setorRepository.SaveChangesAsync();
+
+			return _mapper.Map<VagaViewModel>(vaga);
+		}
+
+		public async Task<bool> DeletarVaga(long setorId, int numero)
+		{
+			var setor = await _setorRepository.ObterSetorPorId(setorId);
+
+			if (setor == null) return false;
+
+			setor.RemoverVaga(numero);
+
+			await _setorRepository.AtualizarSetor(setor);
+			await _setorRepository.SaveChangesAsync();
+
+			return true;
+		}
+
+		public async Task<bool> AtualizarStatusVaga(VagaOcupadaDTO vagaDTO)
+		{
+			var setor = await _setorRepository.ObterSetorPorId(vagaDTO.SetorId);
+
+			if (setor == null) return false;
+
+			var vaga = setor.Vagas.FirstOrDefault(x => x.Numero == vagaDTO.Numero);
+
+			if (vaga == null) return false;
+
+			vaga.AtualizarStatus(vagaDTO.Ocupado);
+
+			await _setorRepository.AtualizarVaga(vaga);
+			await _setorRepository.SaveChangesAsync();
+
+			return true;
+		}
 	}
 }

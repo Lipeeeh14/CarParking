@@ -71,7 +71,43 @@ namespace CarParking.Controllers
 			if (!result)
 				return BadRequest();
 
+			return Ok();
+		}
+
+		[HttpPost]
+		[Route("vaga")]
+		public async Task<IActionResult> CadastrarVaga(CadastroVagaDTO vagaDTO) 
+		{
+			var result = await _setorService.CadastrarVaga(vagaDTO);
+
+			if (result == null)
+				return BadRequest("Erro ao cadastrar a vaga!");
+
 			return Ok(result);
+		}
+
+		[HttpDelete]
+		[Route("{id}/vaga/{numero}")]
+		public async Task<IActionResult> DeletarVaga(long id, int numero) 
+		{
+			var result = await _setorService.DeletarVaga(id, numero);
+
+			if (!result)
+				return BadRequest();
+
+			return Ok();
+		}
+
+		[HttpPatch]
+		[Route("vaga/status")]
+		public async Task<IActionResult> AtualizarVaga(VagaOcupadaDTO vagaOcupadaDTO) 
+		{
+			var result = await _setorService.AtualizarStatusVaga(vagaOcupadaDTO);
+
+			if (!result)
+				return BadRequest();
+
+			return Ok();
 		}
 	}
 }

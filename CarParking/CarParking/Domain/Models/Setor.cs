@@ -19,9 +19,23 @@
             Vagas.Add(vaga);
         }
 
-        public void Atualizar(string sigla) 
+        public void Atualizar(string sigla)
         {
             Sigla = sigla;
+        }
+
+        private Vaga ObterVaga(int numero) => Vagas.FirstOrDefault(v => v.Id == numero);
+
+        public bool VagaExistente(int numero) => Vagas.Any(v => v.Id == numero);
+
+        public void AdicionarVaga(Vaga vaga) => Vagas.Add(vaga);
+
+        public void RemoverVaga(int numero)
+        {
+            var vaga = ObterVaga(numero);
+
+            if (vaga != null)
+                Vagas.Remove(vaga);
         }
     }
 }

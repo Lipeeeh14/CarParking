@@ -13,6 +13,9 @@ namespace CarParking.Configuration.Profiles
 
 			CreateMap<AtualizaSetorDTO, Setor>()
 				.ReverseMap();
+
+			CreateMap<CadastroVagaDTO, Vaga>()
+				.ReverseMap();
 		}
 	}
 }
