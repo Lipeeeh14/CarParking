@@ -10,7 +10,7 @@ namespace CarParking.Domain.Models
         public int SetorId { get; private set; }
         public Setor Setor { get; private set; }
 
-        public bool Ocupado { get; private set; } // Criar um status para vaga futuramente
+        public bool Ocupado { get; private set; } // TODO: Criar um status para vaga futuramente
 
         [NotMapped]
         public string Sigla => $"{Setor?.Sigla}{Numero}";

@@ -100,7 +100,7 @@ namespace CarParking.Controllers
 
 		[HttpPatch]
 		[Route("vaga/status")]
-		public async Task<IActionResult> AtualizarVaga(VagaOcupadaDTO vagaOcupadaDTO) 
+		public async Task<IActionResult> AtualizarStatusVaga(VagaOcupadaDTO vagaOcupadaDTO) 
 		{
 			var result = await _setorService.AtualizarStatusVaga(vagaOcupadaDTO);
 
