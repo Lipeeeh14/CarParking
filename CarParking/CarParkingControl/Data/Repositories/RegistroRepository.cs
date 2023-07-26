@@ -21,16 +21,18 @@ namespace CarParkingControl.Data.Repositories
 
 		public async Task<IEnumerable<RegistroVaga>> ObterRegistrosPorVagaIdOuPlaca(string? placaVeiculo = null, long? vagaId = null)
 		{
-			var query = _context.RegistroVaga
-				.Where(x => x.Id > 0);
+			var result = await _context.RegistroVaga
+				.Where(x => (!string.IsNullOrEmpty(placaVeiculo) && x.PlacaVeiculo.ToLower().Equals(placaVeiculo)) ||
+							(vagaId.HasValue && vagaId == x.VagaId))
+				.ToListAsync();
 
-			if (vagaId.HasValue)
-				query = query.Where(x => x.VagaId == vagaId.Value);
+			//if (vagaId.HasValue)
+			//	query = query.Where(x => x.VagaId == vagaId.Value);
 
-			if (!string.IsNullOrEmpty(placaVeiculo))
-				query = query.Where(x => x.PlacaVeiculo.ToLower().Equals(placaVeiculo.ToLower()));
+			//if (!string.IsNullOrEmpty(placaVeiculo))
+			//	query = query.Where(x => x.PlacaVeiculo.ToLower() == placaVeiculo.ToLower());
 
-			var result = await _context.RegistroVaga.ToListAsync();
+			//var result = await _context.RegistroVaga.ToListAsync();
 
 			if (result == null)
 				return new List<RegistroVaga>();
