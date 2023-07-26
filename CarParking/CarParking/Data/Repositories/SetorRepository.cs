@@ -46,6 +46,12 @@ namespace CarParking.Data.Repositories
 			await Task.Run(() => _context.Remove(setor));
 		}
 
+		public async Task<Vaga?> ObterVagaPorId(long vagaId)
+		{
+			return await _context.Vaga
+				.FirstOrDefaultAsync(x => x.Id == vagaId);
+		}
+
 		public async Task AtualizarVaga(Vaga vaga)
 		{
 			await Task.Run(() => _context.Vaga.Update(vaga));

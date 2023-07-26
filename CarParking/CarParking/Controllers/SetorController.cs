@@ -74,6 +74,18 @@ namespace CarParking.Controllers
 			return Ok();
 		}
 
+		[HttpGet]
+		[Route("{id}")]
+		public async Task<IActionResult> ObterVagaPorId(long id)
+		{
+			var result = await _setorService.ObterVagaPorId(id);
+
+			if (result == null)
+				return NotFound();
+
+			return Ok(result);
+		}
+
 		[HttpPost]
 		[Route("vaga")]
 		public async Task<IActionResult> CadastrarVaga(CadastroVagaDTO vagaDTO) 

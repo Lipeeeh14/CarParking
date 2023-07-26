@@ -10,6 +10,7 @@ namespace CarParking.Data.Repositories.Interfaces
 		Task CadastrarSetor(Setor setor);
 		Task AtualizarSetor(Setor setor);
 		Task DeletarSetor(Setor setor);
+		Task<Vaga?> ObterVagaPorId(long vagaId);
 		Task AtualizarVaga(Vaga vaga);
 	}
 }

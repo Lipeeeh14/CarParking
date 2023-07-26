@@ -70,6 +70,12 @@ namespace CarParking.Domain.Services
 			return true;
 		}
 
+		public async Task<VagaViewModel?> ObterVagaPorId(long vagaId)
+		{
+			var vaga = await _setorRepository.ObterVagaPorId(vagaId);
+			return _mapper.Map<VagaViewModel>(vaga);
+		}
+
 		public async Task<VagaViewModel?> CadastrarVaga(CadastroVagaDTO vagaDTO)
 		{
 			var setor = await _setorRepository.ObterSetorPorId(vagaDTO.SetorId);

@@ -10,6 +10,7 @@ namespace CarParking.Domain.Services.Interfaces
 		Task<SetorViewModel?> SalvarSetor(CadastroSetorDTO setorDTO);
 		Task<SetorViewModel?> AtualizarSetor(AtualizaSetorDTO setorDTO);
 		Task<bool> DeletarSetor(long id);
+		Task<VagaViewModel?> ObterVagaPorId(long vagaId);
 		Task<VagaViewModel?> CadastrarVaga(CadastroVagaDTO vagaDTO);
 		Task<bool> DeletarVaga(long setorId, int numero);
 		Task<bool> AtualizarStatusVaga(VagaOcupadaDTO vagaDTO);
