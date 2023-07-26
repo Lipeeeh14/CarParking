@@ -75,7 +75,7 @@ namespace CarParking.Controllers
 		}
 
 		[HttpGet]
-		[Route("{id}")]
+		[Route("vaga/{id}")]
 		public async Task<IActionResult> ObterVagaPorId(long id)
 		{
 			var result = await _setorService.ObterVagaPorId(id);

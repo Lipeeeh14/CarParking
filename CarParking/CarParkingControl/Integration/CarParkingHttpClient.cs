@@ -25,5 +25,10 @@ namespace CarParkingControl.Integration
 
 			return true;
 		}
+
+		public Task<bool> ValidarVagaExistenteDesocupada(long vagaId)
+		{
+			var endpoint = $"{_configuration["CarParking:Url"]}/Setor/vaga"
+		}
 	}
 }
