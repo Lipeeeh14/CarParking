@@ -29,6 +29,10 @@ namespace CarParkingControl.Domain.Services
 
 			if (registros.Any(x => x.Ativa)) return null;
 
+			var vagaDesocupada = await _carParkingHttpClient.ValidarVagaExistenteDesocupada(registroVagaDTO.VagaId);
+
+			if (!vagaDesocupada) return null;
+
 			// TODO: Atualizar flag da vaga no módulo CarParking
 			var veiculoCadastrado = await _carParkingHttpClient.ValidarVeiculoCadastradoPorPlaca(registroVagaDTO.PlacaVeiculo);
 
@@ -36,6 +40,10 @@ namespace CarParkingControl.Domain.Services
 		
 			await _registroRepository.SalvarRegistroVaga(registro);
 			await _registroRepository.SaveChangesAsync();
+
+			var statusResult = await _carParkingHttpClient.AtualizarStatusVaga(registro, true);
+
+			if (!statusResult) return null;
 
 			return _mapper.Map<RegistroVagaViewModel>(registro);
 		}
@@ -55,6 +63,10 @@ namespace CarParkingControl.Domain.Services
 
 			await _registroRepository.AtualizarRegistroVaga(registro);
 			await _registroRepository.SaveChangesAsync();
+
+			var statusResult = await _carParkingHttpClient.AtualizarStatusVaga(registro);
+
+			if (!statusResult) return null;
 
 			return _mapper.Map<RegistroVagaViewModel>(registro);
 		}

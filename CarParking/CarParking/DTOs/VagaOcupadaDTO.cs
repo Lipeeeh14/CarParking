@@ -1,4 +1,4 @@
 ﻿namespace CarParking.DTOs
 {
-	public record VagaOcupadaDTO(long SetorId, int Numero, bool Ocupado);
+	public record VagaOcupadaDTO(long VagaId, bool Ocupado);
 }

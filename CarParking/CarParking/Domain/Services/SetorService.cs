@@ -110,11 +110,7 @@ namespace CarParking.Domain.Services
 
 		public async Task<bool> AtualizarStatusVaga(VagaOcupadaDTO vagaDTO)
 		{
-			var setor = await _setorRepository.ObterSetorPorId(vagaDTO.SetorId);
-
-			if (setor == null) return false;
-
-			var vaga = setor.Vagas.FirstOrDefault(x => x.Numero == vagaDTO.Numero);
+			var vaga = await _setorRepository.ObterVagaPorId(vagaDTO.VagaId);
 
 			if (vaga == null) return false;
 
